@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)https://litter.catbox.moe/dydynl.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PEC Antilles Pro v2 — Rapprochement Tiers Payant</title>
+<script src="./PEC Antilles Pro v2 — Rapprochement Tiers Payant_files/xlsx.full.min.js.téléchargement"></script>
+<style>
+:root {
+  --bg-base: #0B1120;
+  --bg-raised: #111827;
+  --bg-surface: #1F2937;
+  --bg-glass: rgba(255,255,255,0.04);
+  --bg-glass-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.15);
+  --emerald: #10B981;
+  --emerald-dim: rgba(16,185,129,0.15);
+  --amber: #F59E0B;
+  --amber-dim: rgba(245,158,11,0.15);
+  --rose: #EF4444;
+  --rose-dim: rgba(239,68,68,0.15);
+  --indigo: #6366F1;
+  --indigo-dim: rgba(99,102,241,0.15);
+  --sky: #38BDF8;
+  --sky-dim: rgba(56,189,248,0.15);
+  --text: #F1F5F9;
+  --text-dim: #94A3B8;
+  --text-muted: #64748B;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: var(--bg-base);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+body::before {
+  content:'';
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background: radial-gradient(ellipse 70% 40% at 20% 0%, rgba(16,185,129,0.07), transparent),
+              radial-gradient(ellipse 50% 50% at 80% 100%, rgba(56,189,248,0.05), transparent);
+}
+
+/* ─── HEADER ─── */
+.header {
+  background: rgba(17,24,39,0.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 32px;
+  position: sticky; top:0; z-index:100;
+}
+.header-inner {
+  max-width: 1440px; margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.logo { display:flex; align-items:center; gap:12px; }
+.logo-mark {
+  width:38px; height:38px;
+  background: linear-gradient(135deg, var(--emerald), var(--sky));
+  border-radius: 8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; font-weight:700; color:#0B1120;
+}
+.logo-name { font-size:17px; font-weight:700; letter-spacing:-0.3px; }
+.logo-sub { font-size:10px; color:var(--text-muted); letter-spacing:0.5px; text-transform:uppercase; }
+.version-badge {
+  background: var(--emerald-dim);
+  color: var(--emerald);
+  padding: 4px 10px; border-radius: 12px;
+  font-size: 10px; font-weight: 600; letter-spacing:0.5px;
+}
+
+/* ─── CONTAINER ─── */
+.container { max-width:1440px; margin:0 auto; padding:28px 32px; }
+
+/* ─── UPLOAD SECTION ─── */
+.section-label {
+  font-size:11px; font-weight:600; color:var(--text-muted);
+  text-transform:uppercase; letter-spacing:1.2px;
+  margin-bottom:14px; display:flex; align-items:center; gap:10px;
+}
+.section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.upload-grid {
+  display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+  margin-bottom:20px;
+}
+.upload-card {
+  background: var(--bg-glass);
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  cursor:pointer;
+  transition: all 0.2s ease;
+  position:relative;
+}
+.upload-card:hover { border-color:var(--indigo); background:var(--bg-glass-hover); transform:translateY(-1px); }
+.upload-card.loaded { border-style:solid; border-color:var(--emerald); background:var(--emerald-dim); }
+.upload-card input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; z-index:2; }
+.upload-card-head { display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+.upload-icon {
+  width:40px; height:40px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+  transition: all 0.2s;
+}
+.upload-icon.recettes { background:var(--amber-dim); }
+.upload-icon.secu { background:var(--sky-dim); }
+.upload-card.loaded .upload-icon { background:var(--emerald); color:#0B1120; }
+.upload-title { font-size:14px; font-weight:600; }
+.upload-sub { font-size:11px; color:var(--text-muted); }
+.upload-file-info { font-size:11px; color:var(--emerald); font-weight:500; margin-top:6px; display:none; }
+.upload-card.loaded .upload-file-info { display:block; }
+
+/* ─── MUTUELLE SLOTS ─── */
+.mutuelle-section {
+  background:var(--bg-glass);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:18px; margin-bottom:24px;
+}
+.mutuelle-head {
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;
+}
+.mutuelle-head h3 { font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; }
+.mutuelle-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px; }
+.mut-slot {
+  background:var(--bg-surface);
+  border:1px dashed var(--border-hover);
+  border-radius:var(--radius);
+  padding:14px; text-align:center;
+  cursor:pointer; transition:all 0.2s;
+  position:relative; min-height:80px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.mut-slot:hover { border-color:var(--emerald); }
+.mut-slot.loaded { border-style:solid; border-color:var(--emerald); background:var(--emerald-dim); }
+.mut-slot input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; }
+.mut-slot-icon { font-size:20px; margin-bottom:4px; opacity:0.4; }
+.mut-slot.loaded .mut-slot-icon { opacity:1; }
+.mut-slot-text { font-size:11px; color:var(--text-muted); }
+.mut-slot-name { font-size:10px; color:var(--emerald); font-weight:500; margin-top:4px; word-break:break-all; }
+.mut-slot .remove-btn {
+  position:absolute; top:4px; right:4px; width:20px; height:20px;
+  background:var(--rose); border:none; border-radius:50%; color:#fff;
+  font-size:12px; cursor:pointer; display:none; align-items:center; justify-content:center; z-index:5;
+}
+.mut-slot.loaded .remove-btn { display:flex; }
+
+/* ─── ACTIONS ─── */
+.actions { display:flex; justify-content:center; gap:12px; margin-bottom:28px; }
+.btn {
+  padding:10px 24px; border:none; border-radius:var(--radius);
+  font-family:inherit; font-size:13px; font-weight:600;
+  cursor:pointer; transition:all 0.2s;
+  display:inline-flex; align-items:center; gap:7px;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--emerald), var(--sky));
+  color:#0B1120;
+}
+.btn-primary:hover:not(:disabled) { transform:translateY(-1px); filter:brightness(1.1); }
+.btn-primary:disabled { opacity:0.3; cursor:not-allowed; }
+.btn-ghost {
+  background:var(--bg-glass);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+.btn-ghost:hover { background:var(--bg-glass-hover); }
+
+/* ─── LOADING ─── */
+#loading { display:none; text-align:center; padding:50px 20px; }
+#loading.visible { display:block; }
+.spinner {
+  width:44px; height:44px;
+  border:3px solid var(--bg-surface);
+  border-top-color:var(--emerald);
+  border-radius:50%;
+  animation:spin 0.7s linear infinite;
+  margin:0 auto 16px;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ─── ALERT ─── */
+.alert {
+  background:var(--rose-dim); border:1px solid rgba(239,68,68,0.3);
+  border-radius:var(--radius); padding:12px 16px;
+  margin-bottom:16px; display:none; align-items:center; gap:10px;
+  font-size:13px;
+}
+.alert.visible { display:flex; }
+.alert-icon { font-size:16px; }
+.alert-msg { flex:1; }
+.alert-msg strong { color:var(--rose); }
+
+/* ─── KPI CARDS ─── */
+#results { display:none; }
+#results.visible { display:block; animation:fadeUp 0.4s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+.kpi-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(155px,1fr));
+  gap:12px; margin-bottom:24px;
+}
+.kpi {
+  background:var(--bg-glass); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:16px;
+  transition:all 0.2s;
+}
+.kpi:hover { transform:translateY(-2px); border-color:var(--border-hover); }
+.kpi-label { font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:6px; }
+.kpi-value { font-size:20px; font-weight:700; font-variant-numeric:tabular-nums; }
+.kpi.emerald { border-left:3px solid var(--emerald); }
+.kpi.emerald .kpi-value { color:var(--emerald); }
+.kpi.sky { border-left:3px solid var(--sky); }
+.kpi.sky .kpi-value { color:var(--sky); }
+.kpi.amber { border-left:3px solid var(--amber); }
+.kpi.amber .kpi-value { color:var(--amber); }
+.kpi.rose { border-left:3px solid var(--rose); }
+.kpi.rose .kpi-value { color:var(--rose); }
+.kpi.indigo { border-left:3px solid var(--indigo); }
+.kpi.indigo .kpi-value { color:var(--indigo); }
+
+/* ─── STATUS BAR ─── */
+.status-bar {
+  display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;
+}
+.status-chip {
+  padding:6px 14px; border-radius:20px;
+  font-size:12px; font-weight:600; cursor:pointer;
+  transition:all 0.15s; border:1px solid transparent;
+}
+.status-chip:hover { filter:brightness(1.2); }
+.status-chip.active { border-color:var(--text); }
+.chip-all { background:var(--bg-surface); color:var(--text); }
+.chip-ok { background:var(--emerald-dim); color:var(--emerald); }
+.chip-ecart { background:var(--amber-dim); color:var(--amber); }
+.chip-impaye { background:var(--rose-dim); color:var(--rose); }
+.chip-orphelin { background:var(--indigo-dim); color:var(--indigo); }
+.chip-verif { background:rgba(168,85,247,0.15); color:#A855F7; }
+
+/* ─── SEARCH ─── */
+.search-bar {
+  display:flex; gap:10px; margin-bottom:16px; align-items:center;
+}
+.search-input {
+  flex:1; padding:9px 14px;
+  background:var(--bg-surface); border:1px solid var(--border);
+  border-radius:var(--radius); color:var(--text);
+  font-family:inherit; font-size:13px;
+  outline:none; transition:border-color 0.2s;
+}
+.search-input:focus { border-color:var(--emerald); }
+.search-input::placeholder { color:var(--text-muted); }
+
+/* ─── TABLE ─── */
+.table-wrap {
+  background:var(--bg-glass); border:1px solid var(--border);
+  border-radius:var(--radius-lg); overflow:hidden;
+}
+.table-scroll { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:12px; }
+thead th {
+  background:var(--bg-raised);
+  padding:10px 12px; text-align:left;
+  font-size:11px; font-weight:600; color:var(--text-muted);
+  text-transform:uppercase; letter-spacing:0.5px;
+  border-bottom:1px solid var(--border);
+  cursor:pointer; user-select:none; white-space:nowrap;
+}
+thead th:hover { color:var(--text); }
+thead th .sort-arrow { margin-left:4px; font-size:9px; opacity:0.4; }
+thead th.sorted .sort-arrow { opacity:1; color:var(--emerald); }
+tbody tr {
+  border-bottom:1px solid var(--border);
+  transition:background 0.1s;
+  cursor:pointer;
+}
+tbody tr:hover { background:var(--bg-glass-hover); }
+tbody td { padding:9px 12px; white-space:nowrap; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; }
+
+/* Status badges */
+.badge {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 8px; border-radius:6px;
+  font-size:10px; font-weight:600;
+}
+.badge-ok { background:var(--emerald-dim); color:var(--emerald); }
+.badge-ecart { background:var(--amber-dim); color:var(--amber); }
+.badge-impaye { background:var(--rose-dim); color:var(--rose); }
+.badge-orphelin { background:var(--indigo-dim); color:var(--indigo); }
+.badge-verif { background:rgba(168,85,247,0.15); color:#A855F7; }
+.conf-bar { display:inline-block; width:40px; height:6px; background:var(--bg-surface); border-radius:3px; overflow:hidden; vertical-align:middle; margin-right:6px; }
+.conf-bar-fill { height:100%; transition:width 0.3s; }
+.badge-cmu { background:rgba(168,85,247,0.15); color:#A855F7; }
+
+/* ─── DETAIL PANEL ─── */
+#detail-panel {
+  display:none; position:fixed; top:0; right:0;
+  width:420px; max-width:90vw; height:100vh;
+  background:var(--bg-raised); border-left:1px solid var(--border);
+  z-index:200; overflow-y:auto; padding:24px;
+  box-shadow:-8px 0 30px rgba(0,0,0,0.4);
+}
+#detail-panel.open { display:block; animation:slideIn 0.2s ease; }
+@keyframes slideIn { from{transform:translateX(100%)} to{transform:translateX(0)} }
+.detail-close {
+  position:absolute; top:12px; right:12px;
+  width:28px; height:28px; border-radius:6px;
+  background:var(--bg-surface); border:1px solid var(--border);
+  color:var(--text); cursor:pointer; font-size:14px;
+  display:flex; align-items:center; justify-content:center;
+}
+.detail-close:hover { background:var(--rose-dim); border-color:var(--rose); }
+.detail-title { font-size:16px; font-weight:700; margin-bottom:16px; }
+.detail-section { margin-bottom:16px; }
+.detail-section h4 { font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.8px; margin-bottom:8px; }
+.detail-row {
+  display:flex; justify-content:space-between; padding:6px 0;
+  border-bottom:1px solid var(--border); font-size:12px;
+}
+.detail-row .label { color:var(--text-dim); }
+.detail-row .value { font-weight:600; font-variant-numeric:tabular-nums; }
+.detail-row .value.pos { color:var(--emerald); }
+.detail-row .value.neg { color:var(--rose); }
+.detail-row .value.warn { color:var(--amber); }
+.detail-sources { margin-top:8px; }
+.detail-source {
+  background:var(--bg-surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:10px; margin-bottom:8px; font-size:11px;
+}
+.detail-source .src-type { font-weight:600; color:var(--sky); margin-bottom:4px; }
+
+/* ─── EXPORT BAR ─── */
+.export-bar {
+  display:flex; gap:10px; justify-content:flex-end;
+  margin-top:20px; padding-top:16px;
+  border-top:1px solid var(--border);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:768px) {
+  .container { padding:16px; }
+  .upload-grid { grid-template-columns:1fr; }
+  .kpi-grid { grid-template-columns:repeat(2,1fr); }
+  .header { padding:12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">PA</div>
+      <div>
+        <div class="logo-name">PEC Antilles Pro</div>
+        <div class="logo-sub">Rapprochement Tiers Payant</div>
+      </div>
+    </div>
+    <span class="version-badge">v2.0</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ALERT -->
+  <div class="alert" id="alert">
+    <span class="alert-icon">⚠️</span>
+    <div class="alert-msg" id="alert-msg"></div>
+  </div>
+
+  <!-- UPLOAD: Required files -->
+  <div class="section-label">📂 Fichiers obligatoires</div>
+  <div class="upload-grid">
+    <div class="upload-card" id="drop-recettes">
+      <input type="file" accept=".xlsx,.xls" id="file-recettes">
+      <div class="upload-card-head">
+        <div class="upload-icon recettes">📋</div>
+        <div>
+          <div class="upload-title">Livre de Recettes</div>
+          <div class="upload-sub">Fichier mensuel des facturations</div>
+        </div>
+      </div>
+      <div class="upload-file-info" id="info-recettes"></div>
+    </div>
+    <div class="upload-card" id="drop-secu">
+      <input type="file" accept=".xlsx,.xls" id="file-secu">
+      <div class="upload-card-head">
+        <div class="upload-icon secu">🏥</div>
+        <div>
+          <div class="upload-title">Relevé Sécurité Sociale</div>
+          <div class="upload-sub">Décompte CPAM mensuel</div>
+        </div>
+      </div>
+      <div class="upload-file-info" id="info-secu"></div>
+    </div>
+  </div>
+
+  <!-- UPLOAD: Mutuelles -->
+  <div class="mutuelle-section">
+    <div class="mutuelle-head">
+      <h3>🏦 Mutuelles <span id="mut-count" style="font-size:11px;color:var(--text-muted)">(0 chargée)</span></h3>
+    </div>
+    <div class="mutuelle-grid" id="mut-grid"><div class="mut-slot " id="mut-0">
+      <input type="file" accept=".xlsx,.xls" data-idx="0">
+      <button class="remove-btn" data-idx="0">✕</button>
+      <div class="mut-slot-icon">🔵</div>
+      <div class="mut-slot-text">Almerys</div>
+      
+    </div><div class="mut-slot " id="mut-1">
+      <input type="file" accept=".xlsx,.xls" data-idx="1">
+      <button class="remove-btn" data-idx="1">✕</button>
+      <div class="mut-slot-icon">🟢</div>
+      <div class="mut-slot-text">iSanté</div>
+      
+    </div><div class="mut-slot " id="mut-2">
+      <input type="file" accept=".xlsx,.xls" data-idx="2">
+      <button class="remove-btn" data-idx="2">✕</button>
+      <div class="mut-slot-icon">🟡</div>
+      <div class="mut-slot-text">Viamedis</div>
+      
+    </div><div class="mut-slot " id="mut-3">
+      <input type="file" accept=".xlsx,.xls" data-idx="3">
+      <button class="remove-btn" data-idx="3">✕</button>
+      <div class="mut-slot-icon">➕</div>
+      <div class="mut-slot-text">Autre</div>
+      
+    </div><div class="mut-slot " id="mut-4">
+      <input type="file" accept=".xlsx,.xls" data-idx="4">
+      <button class="remove-btn" data-idx="4">✕</button>
+      <div class="mut-slot-icon">➕</div>
+      <div class="mut-slot-text">Autre</div>
+      
+    </div></div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="btn btn-primary" id="btn-analyse" disabled="">⚡ Lancer le rapprochement</button>
+    <button class="btn btn-ghost" id="btn-reset" style="display:none">🔄 Réinitialiser</button>
+  </div>
+
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <div style="font-size:14px;font-weight:500" id="loading-text">Analyse en cours…</div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:4px" id="loading-sub"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="section-label">📊 Synthèse</div>
+    <div class="kpi-grid" id="kpi-grid"></div>
+
+    <div class="status-bar" id="status-bar"></div>
+
+    <div class="search-bar">
+      <input class="search-input" type="text" placeholder="Rechercher par patient ou N°FSE…" id="search">
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table>
+          <thead id="thead"><tr><th class="" data-col="fse">N° FSE<span class="sort-arrow">▲</span></th><th class="" data-col="patient">Patient<span class="sort-arrow">▲</span></th><th class="" data-col="date">Date<span class="sort-arrow">▲</span></th><th class="" data-col="montant">Facturé<span class="sort-arrow">▲</span></th><th class="" data-col="recuAMO">AMO Reçu<span class="sort-arrow">▲</span></th><th class="" data-col="recuAMC">AMC Reçu<span class="sort-arrow">▲</span></th><th class="" data-col="totalRecu">Total Reçu<span class="sort-arrow">▲</span></th><th class="" data-col="ecart">Écart<span class="sort-arrow">▲</span></th><th class="" data-col="statut">Statut<span class="sort-arrow">▲</span></th><th class="" data-col="confidence">Confiance<span class="sort-arrow">▲</span></th><th class="" data-col="mutSources">Source<span class="sort-arrow">▲</span></th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="export-bar">
+      <button class="btn btn-ghost" id="btn-ai-verify">🤖 Vérifier avec IA</button>
+      <button class="btn btn-ghost" id="btn-ai-key">🔑 Clé API</button>
+      <button class="btn btn-ghost" id="btn-insights">📊 Insights</button>
+      <button class="btn btn-ghost" id="btn-csv">📥 Export CSV</button>
+      <button class="btn btn-ghost" id="btn-audit">📄 Rapport Audit</button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div id="detail-panel">
+  <button class="detail-close" id="detail-close">✕</button>
+  <div id="detail-content"></div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════
+   PEC Antilles Pro v2 — Engine
+   ═══════════════════════════════════════ */
+
+const STATE = {
+  files: { recettes: null, secu: null, mutuelles: [] },
+  raw: { recettes: [], secu: [], mutuelles: [] },
+  results: null,
+  filter: 'ALL',
+  search: '',
+  sort: { col: null, asc: true }
+};
+
+const MUT_SLOTS = [
+  { id:'almerys', label:'Almerys', icon:'🔵' },
+  { id:'isante', label:'iSanté', icon:'🟢' },
+  { id:'viamedis', label:'Viamedis', icon:'🟡' },
+  { id:'autre1', label:'Autre', icon:'➕' },
+  { id:'autre2', label:'Autre', icon:'➕' }
+];
+
+/* ─── UTILITIES ─── */
+const $ = id => document.getElementById(id);
+const fmt = n => {
+  if (n == null || isNaN(n)) return '—';
+  return new Intl.NumberFormat('fr-FR', { style:'currency', currency:'EUR' }).format(n);
+};
+const fmtPlain = n => {
+  if (n == null || isNaN(n)) return '0';
+  return new Intl.NumberFormat('fr-FR', { minimumFractionDigits:2, maximumFractionDigits:2 }).format(n);
+};
+const pct = n => {
+  if (n == null || isNaN(n)) return '—';
+  return new Intl.NumberFormat('fr-FR', { style:'percent', minimumFractionDigits:1, maximumFractionDigits:1 }).format(n / 100);
+};
+const toNum = v => {
+  if (v == null || v === '') return 0;
+  let s = String(v).replace(/\s/g, '').replace(',', '.');
+  let n = parseFloat(s);
+  return isNaN(n) ? 0 : n;
+};
+const toStr = v => v == null ? '' : String(v).trim();
+const normName = s => {
+  if (!s) return '';
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .toUpperCase()
+    .replace(/[-_]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+};
+
+function readXlsx(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const wb = XLSX.read(e.target.result, { type:'array', cellDates:true });
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const data = XLSX.utils.sheet_to_json(ws, { defval:'', raw:false });
+        resolve(data);
+      } catch(err) { reject(err); }
+    };
+    reader.onerror = () => reject(new Error('Erreur lecture fichier'));
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+/* ─── COLUMN FINDERS ─── */
+function findCol(headers, patterns) {
+  for (const p of patterns) {
+    const idx = headers.findIndex(h => {
+      const hn = normName(h);
+      if (typeof p === 'string') return hn.includes(p);
+      return p.test(hn);
+    });
+    if (idx >= 0) return headers[idx];
+  }
+  return null;
+}
+
+function getVal(row, key) {
+  if (!key) return '';
+  return row[key] !== undefined ? row[key] : '';
+}
+
+/* ─── FUZZY MATCHING ENGINE ─── */
+// Levenshtein distance (edit distance)
+function levenshtein(a, b) {
+  if (!a || !b) return Math.max(a?.length || 0, b?.length || 0);
+  if (a === b) return 0;
+  const m = a.length, n = b.length;
+  if (!m) return n;
+  if (!n) return m;
+  let prev = Array(n + 1).fill(0);
+  let curr = Array(n + 1).fill(0);
+  for (let j = 0; j <= n; j++) prev[j] = j;
+  for (let i = 1; i <= m; i++) {
+    curr[0] = i;
+    for (let j = 1; j <= n; j++) {
+      curr[j] = a[i-1] === b[j-1] ? prev[j-1] : Math.min(prev[j-1], prev[j], curr[j-1]) + 1;
+    }
+    [prev, curr] = [curr, prev];
+  }
+  return prev[n];
+}
+
+// Jaro similarity (0-1)
+function jaro(a, b) {
+  if (!a || !b) return 0;
+  if (a === b) return 1;
+  const m = a.length, n = b.length;
+  const matchDist = Math.max(m, n) / 2 - 1;
+  const aMatch = new Array(m).fill(false);
+  const bMatch = new Array(n).fill(false);
+  let matches = 0;
+  for (let i = 0; i < m; i++) {
+    const start = Math.max(0, i - matchDist);
+    const end = Math.min(i + matchDist + 1, n);
+    for (let j = start; j < end; j++) {
+      if (bMatch[j] || a[i] !== b[j]) continue;
+      aMatch[i] = true; bMatch[j] = true;
+      matches++; break;
+    }
+  }
+  if (!matches) return 0;
+  let trans = 0, k = 0;
+  for (let i = 0; i < m; i++) {
+    if (!aMatch[i]) continue;
+    while (!bMatch[k]) k++;
+    if (a[i] !== b[k]) trans++;
+    k++;
+  }
+  trans = trans / 2;
+  return (matches/m + matches/n + (matches - trans)/matches) / 3;
+}
+
+// Jaro-Winkler (bonus pour préfixes communs)
+function jaroWinkler(a, b) {
+  const j = jaro(a, b);
+  if (j < 0.7) return j;
+  let prefix = 0;
+  const max = Math.min(4, Math.min(a.length, b.length));
+  for (let i = 0; i < max; i++) {
+    if (a[i] === b[i]) prefix++;
+    else break;
+  }
+  return j + prefix * 0.1 * (1 - j);
+}
+
+// Score de similarité de noms (0-100)
+// Gère les inversions de mots, les décalages, et les fautes
+function nameScore(a, b) {
+  if (!a || !b) return 0;
+  if (a === b) return 100;
+
+  // Jaro-Winkler direct
+  const jw = jaroWinkler(a, b);
+
+  // Test aussi avec les mots inversés (au cas où nom/prénom inversés)
+  const wordsA = a.split(' ').filter(Boolean);
+  const wordsB = b.split(' ').filter(Boolean);
+  const setA = new Set(wordsA);
+  const setB = new Set(wordsB);
+
+  // Jaccard sur mots (combien de mots en commun)
+  const inter = [...setA].filter(x => setB.has(x)).length;
+  const union = new Set([...setA, ...setB]).size;
+  const jaccard = union ? inter / union : 0;
+
+  // Check: est-ce que A est contenu dans B ou inverse ? (prénom complet vs tronqué)
+  let containment = 0;
+  if (a.includes(b) || b.includes(a)) containment = 0.9;
+
+  // Fuzzy sur chaque mot (meilleure correspondance entre mots)
+  let bestWordMatch = 0;
+  if (wordsA.length && wordsB.length) {
+    let sumBest = 0;
+    for (const wa of wordsA) {
+      let best = 0;
+      for (const wb of wordsB) {
+        best = Math.max(best, jaroWinkler(wa, wb));
+      }
+      sumBest += best;
+    }
+    bestWordMatch = sumBest / wordsA.length;
+  }
+
+  // Combine : max des différentes stratégies
+  const score = Math.max(jw, jaccard * 0.95, containment, bestWordMatch);
+  return Math.round(score * 100);
+}
+
+// Calcule le score de confiance d'un match
+function matchConfidence({ fseMatch, nameScoreValue, amountMatch, sourceConsistent }) {
+  if (fseMatch && nameScoreValue >= 70) return 100; // Match parfait
+  if (fseMatch && nameScoreValue < 70) return 50;  // FSE matche mais noms différents → collision ?
+  if (!fseMatch && nameScoreValue >= 92 && amountMatch) return 85;
+  if (!fseMatch && nameScoreValue >= 85 && amountMatch) return 75;
+  if (!fseMatch && nameScoreValue >= 85) return 65;
+  if (!fseMatch && nameScoreValue >= 75) return 50;
+  return 0;
+}
+
+/* ─── PARSE RECETTES ─── */
+function parseRecettes(data) {
+  if (!data.length) return [];
+  const h = Object.keys(data[0]);
+  const cFSE = findCol(h, ['FSE', /N.*FSE/]);
+  const cPatient = findCol(h, ['PATIENT']);
+  const cDate = findCol(h, ['DATE FSE', 'DATE']);
+  const cMontant = findCol(h, ['MONTANT FACTURE']);
+  const cAMO = findCol(h, ['AMO ORTHALIS', 'MONTANT AMO ORTH']);
+  const cAMC = findCol(h, ['AMC ORTHALIS', 'MONTANT AMC ORTH']);
+  const cReste = findCol(h, ['RESTE A CHARGE', 'RESTE CHARGE']);
+  const cPaye = findCol(h, ['MONTANT PAYE']);
+  const cRestePayer = findCol(h, ['RESTE A PAYER']);
+  const cAMOfsv = findCol(h, ['AMO FSV', 'MONTANT AMO FSV']);
+  const cAMCfsv = findCol(h, ['AMC FSV', 'MONTANT AMC FSV']);
+  const cOrgAMO = h.find(x => normName(x) === 'AMO') || findCol(h, [/^AMO$/]);
+  const cOrgAMC = h.find(x => normName(x) === 'AMC') || findCol(h, [/^AMC$/]);
+  const cTypeLot = findCol(h, ['TYPE LOT']);
+
+  return data.map(r => {
+    const fse = toStr(getVal(r, cFSE));
+    if (!fse) return null;
+    return {
+      fse,
+      patient: toStr(getVal(r, cPatient)),
+      patientNorm: normName(getVal(r, cPatient)),
+      date: toStr(getVal(r, cDate)),
+      montant: toNum(getVal(r, cMontant)),
+      attenduAMO: toNum(getVal(r, cAMO)),
+      attenduAMC: toNum(getVal(r, cAMC)),
+      resteCharge: toNum(getVal(r, cReste)),
+      paye: toNum(getVal(r, cPaye)),
+      restePayer: toNum(getVal(r, cRestePayer)),
+      amoFSV: toNum(getVal(r, cAMOfsv)),
+      amcFSV: toNum(getVal(r, cAMCfsv)),
+      orgAMO: toStr(getVal(r, cOrgAMO)),
+      orgAMC: toStr(getVal(r, cOrgAMC)),
+      typeLot: toStr(getVal(r, cTypeLot)),
+      isCMU: toStr(getVal(r, cOrgAMC)).toUpperCase().includes('CMU')
+    };
+  }).filter(Boolean);
+}
+
+/* ─── PARSE SECU ─── */
+function parseSecu(data) {
+  if (!data.length) return [];
+  const h = Object.keys(data[0]);
+  const cFSE = findCol(h, ['FSE', /N.*FSE/]);
+  const cPatient = findCol(h, ['PATIENT']);
+  const cAMO = findCol(h, ['MONTANT AMO', 'AMO']);
+  const cDate = findCol(h, ['DATE']);
+
+  return data.map(r => {
+    const fse = toStr(getVal(r, cFSE));
+    if (!fse) return null;
+    return {
+      fse,
+      patient: toStr(getVal(r, cPatient)),
+      patientNorm: normName(getVal(r, cPatient)),
+      montantAMO: toNum(getVal(r, cAMO)),
+      date: toStr(getVal(r, cDate))
+    };
+  }).filter(Boolean);
+}
+
+/* ─── PARSE MUTUELLE (auto-detect type) ─── */
+function parseMutuelle(data, filename) {
+  if (!data.length) return [];
+  const h = Object.keys(data[0]);
+  const fnUp = (filename || '').toUpperCase();
+
+  const cFSE = findCol(h, ['FSE', /N.*FSE/]);
+  if (!cFSE) return [];
+
+  // Detect mutuelle type
+  let cMontant, cPatient, cPrenom, type;
+
+  if (fnUp.includes('ALMERYS') || findCol(h, ['MONTANT AMC'])) {
+    type = 'Almerys';
+    cMontant = findCol(h, ['MONTANT AMC']);
+    cPatient = findCol(h, ['PATIENT']) || h.find(x => normName(x).includes('PATIENT')) || h[3];
+    cPrenom = findCol(h, ['PRENOM']);
+  } else if (fnUp.includes('ISANTE') || fnUp.includes('SANTE') || findCol(h, ['MONTANT REGLE'])) {
+    type = 'iSanté';
+    cMontant = findCol(h, ['MONTANT REGLE']);
+    cPatient = null; // iSanté has no patient name
+    cPrenom = null;
+  } else if (fnUp.includes('VIAMEDIS') || findCol(h, ['NOM'])) {
+    type = 'Viamedis';
+    cMontant = findCol(h, ['MONTANT AMC', 'AMC']);
+    cPatient = findCol(h, ['NOM']);
+    cPrenom = null;
+  } else {
+    type = 'Autre';
+    cMontant = findCol(h, ['MONTANT AMC', 'MONTANT REGLE', 'MONTANT', 'AMC']);
+    cPatient = findCol(h, ['PATIENT', 'NOM']);
+    cPrenom = findCol(h, ['PRENOM']);
+  }
+
+  return data.map(r => {
+    const fse = toStr(getVal(r, cFSE));
+    if (!fse) return null;
+    let patient = toStr(getVal(r, cPatient));
+    if (cPrenom) {
+      const prenom = toStr(getVal(r, cPrenom));
+      if (prenom) patient = patient + ' ' + prenom;
+    }
+    return {
+      fse,
+      type,
+      patient,
+      patientNorm: normName(patient),
+      montantAMC: toNum(getVal(r, cMontant))
+    };
+  }).filter(Boolean);
+}
+
+/* ─── AGGREGATE BY FSE ─── */
+function aggregateByFSE(rows, valueKey) {
+  const map = {};
+  for (const r of rows) {
+    if (!map[r.fse]) {
+      map[r.fse] = { ...r, [valueKey]: 0, lines: [] };
+    }
+    map[r.fse][valueKey] += r[valueKey] || 0;
+    map[r.fse].lines.push(r);
+  }
+  return map;
+}
+
+/* ─── RAPPROCHEMENT ─── */
+/*
+ * Stratégie de matching (validée avec données janv 2026) :
+ *  - Clé PRIMAIRE : N°FSE (match exact)
+ *  - Sécu : match par FSE (les FSE sécu = FSE recettes pour la CPAM)
+ *  - Mutuelles : match par FSE (quand ça matche, c'est parfait)
+ *  - Les lignes mutuelles/sécu avec FSE absent du livre = paiements pour actes antérieurs = ORPHELINS
+ *  - Fallback nom : UNIQUEMENT si patient unique ET le FSE recettes n'a reçu aucun paiement
+ *    (évite d'attribuer faussement des virements pour actes antérieurs à un acte du mois)
+ */
+function rapprochement(recettes, secuRows, mutRows) {
+  // Aggregate sécu by FSE (multiple rows per FSE → sum)
+  const secuMap = aggregateByFSE(secuRows, 'montantAMO');
+
+  // Aggregate each mutuelle by FSE (multiple rows per FSE possible → sum)
+  const mutMap = {};
+  for (const r of mutRows) {
+    if (!mutMap[r.fse]) mutMap[r.fse] = { total: 0, sources: [], lines: [] };
+    mutMap[r.fse].total += r.montantAMC || 0;
+    if (!mutMap[r.fse].sources.includes(r.type)) mutMap[r.fse].sources.push(r.type);
+    mutMap[r.fse].lines.push(r);
+  }
+
+  // Build recettes indexes
+  const recFSEs = new Set(recettes.map(r => r.fse));
+  const recByName = {};  // pnorm → [recettes]
+  for (const r of recettes) {
+    if (!r.patientNorm) continue;
+    if (!recByName[r.patientNorm]) recByName[r.patientNorm] = [];
+    recByName[r.patientNorm].push(r);
+  }
+
+  const results = [];
+  const matchedSecu = new Set();
+  const matchedMut = new Set();
+
+  for (const rec of recettes) {
+    let recuAMO = 0, recuAMC = 0;
+    let secuDetail = null, mutDetail = null;
+    let matchType = 'none';
+
+    // ─── SECU: FSE match (primary) ───
+    if (secuMap[rec.fse]) {
+      recuAMO = secuMap[rec.fse].montantAMO;
+      secuDetail = secuMap[rec.fse];
+      matchedSecu.add(rec.fse);
+      matchType = 'fse';
+    }
+
+    // ─── MUTUELLE: FSE match (primary) ───
+    if (mutMap[rec.fse]) {
+      recuAMC = mutMap[rec.fse].total;
+      mutDetail = mutMap[rec.fse];
+      matchedMut.add(rec.fse);
+      if (matchType === 'none') matchType = 'fse';
+    }
+
+    // ─── FALLBACK NOM (fuzzy matching si aucun match FSE pour CE patient) ───
+    // Conditions strictes: patient unique dans recettes + aucun autre patient du même nom n'a déjà reçu paiement
+    const samesName = recByName[rec.patientNorm] || [];
+    const isUnique = samesName.length === 1;
+    let confidence = 100; // par défaut : match FSE exact = confiance max
+    let nameMatchScore = 100;
+    let warnings = [];
+
+    // Vérifier la concordance du nom en cas de match FSE
+    if (matchType === 'fse') {
+      if (secuDetail && secuDetail.patientNorm) {
+        const s = nameScore(rec.patientNorm, secuDetail.patientNorm);
+        if (s < 70) {
+          confidence = 50;
+          warnings.push(`⚠️ FSE matche mais noms différents (score ${s}%): Sécu="${secuDetail.patient}"`);
+        }
+        nameMatchScore = Math.min(nameMatchScore, s);
+      }
+      if (mutDetail && mutDetail.lines && mutDetail.lines[0] && mutDetail.lines[0].patientNorm) {
+        const s = nameScore(rec.patientNorm, mutDetail.lines[0].patientNorm);
+        if (s < 70) {
+          confidence = Math.min(confidence, 50);
+          warnings.push(`⚠️ FSE matche mais noms différents (score ${s}%): Mut="${mutDetail.lines[0].patient}"`);
+        }
+        nameMatchScore = Math.min(nameMatchScore, s);
+      }
+    }
+
+    // FALLBACK SÉCU par fuzzy nom
+    if (recuAMO === 0 && isUnique && rec.patientNorm) {
+      let bestMatch = null, bestScore = 0, bestFse = null;
+      for (const [sFse, sRow] of Object.entries(secuMap)) {
+        if (matchedSecu.has(sFse)) continue;
+        if (recFSEs.has(sFse)) continue;
+        if (!sRow.patientNorm) continue;
+        const s = nameScore(rec.patientNorm, sRow.patientNorm);
+        if (s > bestScore) { bestScore = s; bestMatch = sRow; bestFse = sFse; }
+      }
+      if (bestMatch && bestScore >= 85) {
+        recuAMO = bestMatch.montantAMO;
+        secuDetail = bestMatch;
+        matchedSecu.add(bestFse);
+        matchType = matchType === 'none' ? 'nom' : matchType + '+nom';
+        confidence = Math.min(confidence, bestScore);
+        nameMatchScore = Math.min(nameMatchScore, bestScore);
+        if (bestScore < 95) warnings.push(`🔍 Match Sécu par nom (confiance ${bestScore}%)`);
+      } else if (bestMatch && bestScore >= 70) {
+        // Candidat douteux : on ne matche pas mais on flag
+        warnings.push(`❓ Candidat Sécu possible: "${bestMatch.patient}" FSE=${bestFse} (score ${bestScore}%)`);
+      }
+    }
+
+    // FALLBACK MUTUELLE par fuzzy nom
+    if (recuAMC === 0 && isUnique && rec.patientNorm && !rec.isCMU) {
+      let bestMatch = null, bestScore = 0, bestFse = null;
+      for (const [mFse, mData] of Object.entries(mutMap)) {
+        if (matchedMut.has(mFse)) continue;
+        if (recFSEs.has(mFse)) continue;
+        let lineScore = 0;
+        for (const line of mData.lines) {
+          if (!line.patientNorm) continue;
+          const s = nameScore(rec.patientNorm, line.patientNorm);
+          lineScore = Math.max(lineScore, s);
+        }
+        if (lineScore > bestScore) { bestScore = lineScore; bestMatch = mData; bestFse = mFse; }
+      }
+      if (bestMatch && bestScore >= 85) {
+        // Vérification supplémentaire: le montant est-il cohérent avec l'attendu ?
+        const amountPlausible = rec.attenduAMC === 0 || Math.abs(bestMatch.total - rec.attenduAMC) <= Math.max(rec.attenduAMC * 0.5, 5);
+        if (amountPlausible || bestScore >= 95) {
+          recuAMC = bestMatch.total;
+          mutDetail = bestMatch;
+          matchedMut.add(bestFse);
+          matchType = matchType === 'none' ? 'nom' : (matchType.includes('nom') ? matchType : matchType + '+nom');
+          confidence = Math.min(confidence, bestScore);
+          nameMatchScore = Math.min(nameMatchScore, bestScore);
+          if (bestScore < 95) warnings.push(`🔍 Match Mutuelle par nom (confiance ${bestScore}%)`);
+          if (!amountPlausible) warnings.push(`⚠️ Montant mutuelle ${fmtPlain(bestMatch.total)}€ ≠ attendu ${fmtPlain(rec.attenduAMC)}€`);
+        } else {
+          warnings.push(`❓ Mutuelle "${bestMatch.lines[0].patient}" FSE=${bestFse} score=${bestScore}% mais montant incohérent`);
+        }
+      } else if (bestMatch && bestScore >= 70) {
+        warnings.push(`❓ Candidat Mutuelle possible: "${bestMatch.lines[0].patient}" FSE=${bestFse} (score ${bestScore}%)`);
+      }
+    }
+
+    const totalRecu = recuAMO + recuAMC;
+    const ecart = rec.montant - rec.resteCharge - totalRecu;
+    const ecartAbs = Math.abs(ecart);
+
+    let statut;
+    if (recuAMO === 0 && recuAMC === 0) {
+      statut = 'IMPAYÉ';
+    } else if (confidence < 70) {
+      statut = 'À VÉRIFIER';
+    } else if (ecartAbs <= 0.02) {
+      statut = 'OK';
+    } else if (rec.isCMU && Math.abs(rec.montant - recuAMO) <= 0.02) {
+      statut = 'OK';
+    } else {
+      statut = 'ÉCART';
+    }
+
+    results.push({
+      fse: rec.fse,
+      patient: rec.patient,
+      patientNorm: rec.patientNorm,
+      date: rec.date,
+      montant: rec.montant,
+      attenduAMO: rec.attenduAMO,
+      attenduAMC: rec.attenduAMC,
+      resteCharge: rec.resteCharge,
+      recuAMO: Math.round(recuAMO * 100) / 100,
+      recuAMC: Math.round(recuAMC * 100) / 100,
+      totalRecu: Math.round(totalRecu * 100) / 100,
+      ecart: Math.round(ecart * 100) / 100,
+      statut,
+      matchType,
+      confidence,
+      nameMatchScore,
+      warnings,
+      orgAMC: rec.orgAMC,
+      isCMU: rec.isCMU,
+      typeLot: rec.typeLot,
+      mutSources: mutDetail ? mutDetail.sources.join(', ') : '',
+      secuDetail,
+      mutDetail
+    });
+  }
+
+  // Find orphans (in sécu/mutuelles but not matched with any recette)
+  // Ces paiements correspondent à des actes antérieurs non présents dans le livre du mois
+  for (const [fse, row] of Object.entries(secuMap)) {
+    if (matchedSecu.has(fse)) continue;
+    if (recFSEs.has(fse)) continue; // Strange: FSE in recettes but no match—shouldn't happen
+    results.push({
+      fse,
+      patient: row.patient || '',
+      patientNorm: row.patientNorm,
+      date: row.date || '',
+      montant: 0,
+      attenduAMO: 0,
+      attenduAMC: 0,
+      resteCharge: 0,
+      recuAMO: Math.round(row.montantAMO * 100) / 100,
+      recuAMC: 0,
+      totalRecu: Math.round(row.montantAMO * 100) / 100,
+      ecart: 0,
+      statut: 'ORPHELIN',
+      matchType: 'orphelin-secu',
+      orgAMC: '',
+      isCMU: false,
+      typeLot: '',
+      mutSources: 'Sécu',
+      secuDetail: row,
+      mutDetail: null
+    });
+  }
+  for (const [fse, data] of Object.entries(mutMap)) {
+    if (matchedMut.has(fse)) continue;
+    if (recFSEs.has(fse)) continue;
+    const patient = data.lines[0] ? data.lines[0].patient : '';
+    const pnorm = data.lines[0] ? data.lines[0].patientNorm : '';
+    results.push({
+      fse,
+      patient,
+      patientNorm: pnorm,
+      date: '',
+      montant: 0,
+      attenduAMO: 0,
+      attenduAMC: 0,
+      resteCharge: 0,
+      recuAMO: 0,
+      recuAMC: Math.round(data.total * 100) / 100,
+      totalRecu: Math.round(data.total * 100) / 100,
+      ecart: 0,
+      statut: 'ORPHELIN',
+      matchType: 'orphelin-mut',
+      orgAMC: '',
+      isCMU: false,
+      typeLot: '',
+      mutSources: data.sources.join(', '),
+      secuDetail: null,
+      mutDetail: data
+    });
+  }
+
+  // Global recap
+  // Attention : les orphelins NE doivent PAS compter dans le taux de recouvrement du mois,
+  // car ce sont des paiements d'actes hors périmetre du livre de recettes.
+  const items_mois = results.filter(r => r.statut !== 'ORPHELIN');
+  const items_orph = results.filter(r => r.statut === 'ORPHELIN');
+
+  const ok = items_mois.filter(r => r.statut === 'OK');
+  const ecarts = items_mois.filter(r => r.statut === 'ÉCART');
+  const impayes = items_mois.filter(r => r.statut === 'IMPAYÉ');
+  const verif = items_mois.filter(r => r.statut === 'À VÉRIFIER');
+
+  const totalFact = items_mois.reduce((s, r) => s + r.montant, 0);
+  const totalAMO = items_mois.reduce((s, r) => s + r.recuAMO, 0);
+  const totalAMC = items_mois.reduce((s, r) => s + r.recuAMC, 0);
+  const totalRecu = totalAMO + totalAMC;
+  const reste = totalFact - totalRecu;
+  const taux = totalFact > 0 ? (totalRecu / totalFact) * 100 : 0;
+
+  // Orphelins (paiements pour actes antérieurs)
+  const orphAMO = items_orph.reduce((s, r) => s + r.recuAMO, 0);
+  const orphAMC = items_orph.reduce((s, r) => s + r.recuAMC, 0);
+  const orphTotal = orphAMO + orphAMC;
+
+  return {
+    items: results,
+    recap: {
+      totalFact: Math.round(totalFact * 100) / 100,
+      totalAMO: Math.round(totalAMO * 100) / 100,
+      totalAMC: Math.round(totalAMC * 100) / 100,
+      totalRecu: Math.round(totalRecu * 100) / 100,
+      reste: Math.round(reste * 100) / 100,
+      taux: Math.round(taux * 10) / 10,
+      nOK: ok.length,
+      nEcart: ecarts.length,
+      nImpaye: impayes.length,
+      nVerif: verif.length,
+      nOrphelin: items_orph.length,
+      total: results.length,
+      nActes: items_mois.length,
+      orphAMO: Math.round(orphAMO * 100) / 100,
+      orphAMC: Math.round(orphAMC * 100) / 100,
+      orphTotal: Math.round(orphTotal * 100) / 100,
+      grandTotal: Math.round((totalRecu + orphTotal) * 100) / 100
+    }
+  };
+}
+
+/* ─── UI RENDERING ─── */
+function renderKPIs(recap) {
+  // KPI principaux (actes du mois uniquement)
+  $('kpi-grid').innerHTML = [
+    { label:'Total Facturé', value:fmt(recap.totalFact), cls:'sky', hint:`${recap.nActes} actes` },
+    { label:'Reçu AMO (Sécu)', value:fmt(recap.totalAMO), cls:'emerald' },
+    { label:'Reçu AMC (Mutuelles)', value:fmt(recap.totalAMC), cls:'emerald' },
+    { label:'Total Encaissé', value:fmt(recap.totalRecu), cls:'emerald' },
+    { label:'Reste à Percevoir', value:fmt(recap.reste), cls: recap.reste > 0 ? 'rose' : 'emerald' },
+    { label:'Taux Recouvrement', value:pct(recap.taux), cls: recap.taux >= 80 ? 'emerald' : recap.taux >= 50 ? 'amber' : 'rose' }
+  ].map(k => `<div class="kpi ${k.cls}"><div class="kpi-label">${k.label}</div><div class="kpi-value">${k.value}</div>${k.hint ? `<div style="font-size:10px;color:var(--text-muted);margin-top:3px">${k.hint}</div>` : ''}</div>`).join('');
+
+  // KPI orphelins (paiements pour actes antérieurs)
+  if (recap.orphTotal > 0) {
+    const orphEl = document.getElementById('orph-banner');
+    if (orphEl) orphEl.remove();
+    const banner = document.createElement('div');
+    banner.id = 'orph-banner';
+    banner.style.cssText = 'background:var(--indigo-dim);border:1px solid rgba(99,102,241,0.3);border-radius:var(--radius-lg);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap';
+    banner.innerHTML = `
+      <div style="font-size:20px">📅</div>
+      <div style="flex:1;min-width:200px">
+        <div style="font-size:13px;font-weight:600;color:var(--indigo)">Paiements pour actes antérieurs</div>
+        <div style="font-size:11px;color:var(--text-dim);margin-top:2px">${recap.nOrphelin} lignes réglées ce mois-ci pour des actes hors livre janvier</div>
+      </div>
+      <div style="display:flex;gap:20px">
+        <div><div style="font-size:10px;color:var(--text-muted)">AMO</div><div style="font-weight:600;color:var(--emerald)">${fmt(recap.orphAMO)}</div></div>
+        <div><div style="font-size:10px;color:var(--text-muted)">AMC</div><div style="font-weight:600;color:var(--emerald)">${fmt(recap.orphAMC)}</div></div>
+        <div><div style="font-size:10px;color:var(--text-muted)">Total</div><div style="font-weight:700;color:var(--indigo)">${fmt(recap.orphTotal)}</div></div>
+      </div>
+    `;
+    $('kpi-grid').after(banner);
+  }
+
+  // Grand total banner
+  let gtEl = document.getElementById('grand-total');
+  if (gtEl) gtEl.remove();
+  if (recap.grandTotal !== recap.totalRecu) {
+    const gt = document.createElement('div');
+    gt.id = 'grand-total';
+    gt.style.cssText = 'background:linear-gradient(135deg,var(--emerald-dim),var(--sky-dim));border:1px solid var(--emerald);border-radius:var(--radius-lg);padding:14px 20px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center';
+    gt.innerHTML = `
+      <div>
+        <div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.5px">Total général encaissé ce mois</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">Actes du mois + réglements d'actes antérieurs</div>
+      </div>
+      <div style="font-size:24px;font-weight:700;color:var(--emerald)">${fmt(recap.grandTotal)}</div>
+    `;
+    const orphBan = document.getElementById('orph-banner');
+    (orphBan || $('kpi-grid')).after(gt);
+  }
+}
+
+function renderStatusBar(recap) {
+  const chips = [
+    { key:'ALL', label:`Actes (${recap.nActes})`, cls:'chip-all' },
+    { key:'OK', label:`✅ OK (${recap.nOK})`, cls:'chip-ok' },
+    { key:'ÉCART', label:`⚠️ Écarts (${recap.nEcart})`, cls:'chip-ecart' },
+    { key:'IMPAYÉ', label:`❌ Impayés (${recap.nImpaye})`, cls:'chip-impaye' },
+    { key:'À VÉRIFIER', label:`🔍 À vérifier (${recap.nVerif})`, cls:'chip-verif' },
+    { key:'ORPHELIN', label:`🔍 Orphelins (${recap.nOrphelin})`, cls:'chip-orphelin' }
+  ];
+  $('status-bar').innerHTML = chips.map(c =>
+    `<span class="status-chip ${c.cls} ${STATE.filter === c.key ? 'active' : ''}" data-filter="${c.key}">${c.label}</span>`
+  ).join('');
+  $('status-bar').querySelectorAll('.status-chip').forEach(el => {
+    el.onclick = () => { STATE.filter = el.dataset.filter; renderTable(); renderStatusBar(STATE.results.recap); };
+  });
+}
+
+const COLUMNS = [
+  { key:'fse', label:'N° FSE', sortable:true },
+  { key:'patient', label:'Patient', sortable:true },
+  { key:'date', label:'Date', sortable:true },
+  { key:'montant', label:'Facturé', sortable:true, num:true },
+  { key:'recuAMO', label:'AMO Reçu', sortable:true, num:true },
+  { key:'recuAMC', label:'AMC Reçu', sortable:true, num:true },
+  { key:'totalRecu', label:'Total Reçu', sortable:true, num:true },
+  { key:'ecart', label:'Écart', sortable:true, num:true },
+  { key:'statut', label:'Statut', sortable:true },
+  { key:'confidence', label:'Confiance', sortable:true },
+  { key:'mutSources', label:'Source', sortable:true }
+];
+
+function renderTable() {
+  // Header
+  $('thead').innerHTML = '<tr>' + COLUMNS.map(c => {
+    const sorted = STATE.sort.col === c.key;
+    const arrow = sorted ? (STATE.sort.asc ? '▲' : '▼') : '▲';
+    return `<th class="${sorted ? 'sorted' : ''}" data-col="${c.key}">${c.label}<span class="sort-arrow">${arrow}</span></th>`;
+  }).join('') + '</tr>';
+
+  // Filter + search
+  let items = STATE.results.items;
+  if (STATE.filter === 'ALL') items = items.filter(r => r.statut !== 'ORPHELIN');
+  else if (STATE.filter !== 'ALL') items = items.filter(r => r.statut === STATE.filter);
+  if (STATE.search) {
+    const q = normName(STATE.search);
+    items = items.filter(r => r.patientNorm.includes(q) || r.fse.includes(STATE.search));
+  }
+
+  // Sort
+  if (STATE.sort.col) {
+    const c = COLUMNS.find(x => x.key === STATE.sort.col);
+    items = [...items].sort((a, b) => {
+      let va = a[STATE.sort.col], vb = b[STATE.sort.col];
+      if (c && c.num) { va = +va || 0; vb = +vb || 0; }
+      else { va = String(va || ''); vb = String(vb || ''); }
+      if (va < vb) return STATE.sort.asc ? -1 : 1;
+      if (va > vb) return STATE.sort.asc ? 1 : -1;
+      return 0;
+    });
+  }
+
+  // Body
+  $('tbody').innerHTML = items.map(r => {
+    const badgeCls = { 'OK':'badge-ok', 'ÉCART':'badge-ecart', 'IMPAYÉ':'badge-impaye', 'ORPHELIN':'badge-orphelin', 'À VÉRIFIER':'badge-verif' }[r.statut] || '';
+    const icon = { 'OK':'✅', 'ÉCART':'⚠️', 'IMPAYÉ':'❌', 'ORPHELIN':'🔍', 'À VÉRIFIER':'🔍' }[r.statut] || '';
+    const ecartCls = r.ecart > 0.02 ? 'style="color:var(--rose)"' : r.ecart < -0.02 ? 'style="color:var(--amber)"' : '';
+    const conf = r.confidence != null ? r.confidence : 100;
+    const confColor = conf >= 90 ? 'var(--emerald)' : conf >= 70 ? 'var(--amber)' : 'var(--rose)';
+    const hasWarn = r.warnings && r.warnings.length > 0;
+    return `<tr data-fse="${r.fse}">
+      <td>${r.fse}</td>
+      <td>${r.patient}${r.isCMU ? ' <span class="badge badge-cmu">CMU</span>' : ''}${hasWarn ? ' <span title="' + r.warnings.join(' | ').replace(/"/g,'&quot;') + '" style="cursor:help">ℹ️</span>' : ''}</td>
+      <td>${r.date ? new Date(r.date).toLocaleDateString('fr-FR') : ''}</td>
+      <td class="num">${fmt(r.montant)}</td>
+      <td class="num">${fmt(r.recuAMO)}</td>
+      <td class="num">${fmt(r.recuAMC)}</td>
+      <td class="num" style="font-weight:600">${fmt(r.totalRecu)}</td>
+      <td class="num" ${ecartCls}>${fmt(r.ecart)}</td>
+      <td><span class="badge ${badgeCls}">${icon} ${r.statut}</span></td>
+      <td><span class="conf-bar"><span class="conf-bar-fill" style="width:${conf}%;background:${confColor}"></span></span><span style="font-size:10px;color:${confColor};font-weight:600">${conf}%</span></td>
+      <td style="color:var(--text-muted);font-size:11px">${r.mutSources || (r.isCMU ? 'CMU' : '—')}</td>
+    </tr>`;
+  }).join('');
+
+  // Sort click handlers
+  $('thead').querySelectorAll('th').forEach(th => {
+    th.onclick = () => {
+      const col = th.dataset.col;
+      if (STATE.sort.col === col) STATE.sort.asc = !STATE.sort.asc;
+      else { STATE.sort.col = col; STATE.sort.asc = true; }
+      renderTable();
+    };
+  });
+
+  // Row click → detail
+  $('tbody').querySelectorAll('tr').forEach(tr => {
+    tr.onclick = () => showDetail(tr.dataset.fse);
+  });
+}
+
+function showDetail(fse) {
+  const r = STATE.results.items.find(x => x.fse === fse);
+  if (!r) return;
+  let html = `<div class="detail-title">${r.patient || 'FSE ' + r.fse}</div>`;
+
+  // Warnings en tête si présents
+  if (r.warnings && r.warnings.length) {
+    html += `<div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:var(--radius);padding:10px 12px;margin-bottom:16px;font-size:12px">`;
+    html += `<div style="font-weight:600;color:var(--amber);margin-bottom:6px">⚠️ Vérifications nécessaires</div>`;
+    r.warnings.forEach(w => {
+      html += `<div style="margin:4px 0;color:var(--text-dim)">${w}</div>`;
+    });
+    html += `</div>`;
+  }
+
+  // Score de confiance
+  if (r.confidence != null) {
+    const conf = r.confidence;
+    const confColor = conf >= 90 ? 'var(--emerald)' : conf >= 70 ? 'var(--amber)' : 'var(--rose)';
+    html += `<div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center">`;
+    html += `<span style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Score de confiance</span>`;
+    html += `<span style="font-size:16px;font-weight:700;color:${confColor}">${conf}%</span>`;
+    html += `</div>`;
+  }
+
+  // Main info
+  html += `<div class="detail-section"><h4>Informations</h4>`;
+  html += detailRow('N° FSE', r.fse);
+  html += detailRow('Date', r.date ? new Date(r.date).toLocaleDateString('fr-FR') : '—');
+  html += detailRow('Type', r.typeLot || '—');
+  html += detailRow('Organisme AMO', r.orgAMC || '—');
+  html += detailRow('Match', r.matchType === 'fse' ? 'Par N° FSE' : r.matchType === 'nom' ? 'Par nom patient' : r.matchType);
+  if (r.isCMU) html += detailRow('CMU', '✅ Oui — AMC couvert par Sécu');
+  html += `</div>`;
+
+  // Montants
+  html += `<div class="detail-section"><h4>Montants</h4>`;
+  html += detailRow('Facturé', fmt(r.montant));
+  html += detailRow('Attendu AMO', fmt(r.attenduAMO));
+  html += detailRow('Attendu AMC', fmt(r.attenduAMC));
+  html += detailRow('Reste à charge patient', fmt(r.resteCharge));
+  html += `</div>`;
+
+  html += `<div class="detail-section"><h4>Encaissements</h4>`;
+  html += detailRow('Reçu AMO (Sécu)', fmt(r.recuAMO), r.recuAMO > 0 ? 'pos' : '');
+  html += detailRow('Reçu AMC (Mutuelle)', fmt(r.recuAMC), r.recuAMC > 0 ? 'pos' : '');
+  html += detailRow('Total encaissé', fmt(r.totalRecu), r.totalRecu > 0 ? 'pos' : '');
+  const ecartCls = Math.abs(r.ecart) <= 0.02 ? 'pos' : r.ecart > 0 ? 'neg' : 'warn';
+  html += detailRow('Écart', fmt(r.ecart), ecartCls);
+  html += `</div>`;
+
+  // Sources
+  if (r.secuDetail && r.secuDetail.lines) {
+    html += `<div class="detail-section"><h4>Détail Sécu (${r.secuDetail.lines.length} lignes)</h4><div class="detail-sources">`;
+    r.secuDetail.lines.forEach(l => {
+      html += `<div class="detail-source"><div class="src-type">CPAM</div>AMO: ${fmt(l.montantAMO)}</div>`;
+    });
+    html += `</div></div>`;
+  }
+  if (r.mutDetail && r.mutDetail.lines) {
+    html += `<div class="detail-section"><h4>Détail Mutuelles (${r.mutDetail.lines.length} lignes)</h4><div class="detail-sources">`;
+    r.mutDetail.lines.forEach(l => {
+      html += `<div class="detail-source"><div class="src-type">${l.type}</div>${l.patient ? l.patient + ' — ' : ''}AMC: ${fmt(l.montantAMC)}</div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  $('detail-content').innerHTML = html;
+  $('detail-panel').classList.add('open');
+}
+
+function detailRow(label, value, cls) {
+  return `<div class="detail-row"><span class="label">${label}</span><span class="value ${cls || ''}">${value}</span></div>`;
+}
+
+/* ─── INSIGHTS ENGINE ─── */
+function computeInsights(results) {
+  const items = results.items.filter(r => r.statut !== 'ORPHELIN');
+  const orphelins = results.items.filter(r => r.statut === 'ORPHELIN');
+  const insights = {
+    patientsRisque: [],
+    patientsEcarts: [],
+    topImpayes: [],
+    mutStats: [],
+    outliers: [],
+    collisions: [],
+    general: {},
+    healthScore: 0
+  };
+
+  // ─── Agrégation par patient ───
+  const byPatient = {};
+  for (const r of items) {
+    const key = r.patientNorm || r.patient;
+    if (!byPatient[key]) byPatient[key] = { patient: r.patient, actes: [], totalFact: 0, totalRecu: 0, nImpaye: 0, nEcart: 0, nOk: 0 };
+    byPatient[key].actes.push(r);
+    byPatient[key].totalFact += r.montant;
+    byPatient[key].totalRecu += r.totalRecu;
+    if (r.statut === 'IMPAYÉ') byPatient[key].nImpaye++;
+    else if (r.statut === 'ÉCART') byPatient[key].nEcart++;
+    else if (r.statut === 'OK') byPatient[key].nOk++;
+  }
+
+  // Patients à risque : 2+ impayés OU 100% impayé avec 2+ actes
+  insights.patientsRisque = Object.values(byPatient)
+    .filter(p => p.nImpaye >= 2 || (p.nImpaye > 0 && p.actes.length >= 2 && p.nOk === 0))
+    .sort((a, b) => (b.totalFact - b.totalRecu) - (a.totalFact - a.totalRecu))
+    .slice(0, 15);
+
+  // Patients avec écarts systématiques
+  insights.patientsEcarts = Object.values(byPatient)
+    .filter(p => p.nEcart >= 2)
+    .sort((a, b) => b.nEcart - a.nEcart)
+    .slice(0, 10);
+
+  // Top impayés (par montant)
+  insights.topImpayes = items
+    .filter(r => r.statut === 'IMPAYÉ')
+    .sort((a, b) => b.montant - a.montant)
+    .slice(0, 10);
+
+  // ─── Stats par mutuelle/organisme ───
+  const byMut = {};
+  for (const r of items) {
+    const org = r.isCMU ? 'CMU' : (r.orgAMC || 'Inconnu');
+    if (!byMut[org]) byMut[org] = { org, nActes: 0, facture: 0, attendu: 0, recu: 0, nOk: 0, nEcart: 0, nImpaye: 0 };
+    byMut[org].nActes++;
+    byMut[org].facture += r.montant;
+    byMut[org].attendu += r.attenduAMC + r.attenduAMO;
+    byMut[org].recu += r.totalRecu;
+    if (r.statut === 'OK') byMut[org].nOk++;
+    else if (r.statut === 'ÉCART') byMut[org].nEcart++;
+    else if (r.statut === 'IMPAYÉ') byMut[org].nImpaye++;
+  }
+  insights.mutStats = Object.values(byMut)
+    .map(m => ({
+      ...m,
+      taux: m.facture > 0 ? (m.recu / m.facture) * 100 : 0,
+      tauxOk: m.nActes > 0 ? (m.nOk / m.nActes) * 100 : 0
+    }))
+    .sort((a, b) => b.facture - a.facture);
+
+  // ─── Outliers (montants anormaux) ───
+  const montants = items.map(r => r.montant).filter(m => m > 0);
+  if (montants.length > 5) {
+    const sorted = [...montants].sort((a, b) => a - b);
+    const q1 = sorted[Math.floor(sorted.length * 0.25)];
+    const q3 = sorted[Math.floor(sorted.length * 0.75)];
+    const iqr = q3 - q1;
+    const upperBound = q3 + 1.5 * iqr;
+    insights.outliers = items
+      .filter(r => r.montant > upperBound)
+      .sort((a, b) => b.montant - a.montant)
+      .slice(0, 8);
+    insights.general.median = sorted[Math.floor(sorted.length / 2)];
+    insights.general.moyenne = montants.reduce((s, n) => s + n, 0) / montants.length;
+    insights.general.max = sorted[sorted.length - 1];
+  }
+
+  // ─── Collisions potentielles (confidence faible) ───
+  insights.collisions = items
+    .filter(r => r.confidence != null && r.confidence < 70 && r.statut !== 'IMPAYÉ')
+    .sort((a, b) => a.confidence - b.confidence)
+    .slice(0, 10);
+
+  // ─── Health score ───
+  const recap = results.recap;
+  let score = 50;
+  score += Math.min(30, recap.taux * 0.3);  // taux recouvrement
+  score -= Math.min(20, recap.nImpaye * 2);  // pénalité impayés
+  score -= Math.min(15, recap.nEcart * 0.5); // pénalité écarts
+  if (recap.nVerif > 3) score -= 5;
+  insights.healthScore = Math.max(0, Math.min(100, Math.round(score)));
+
+  // ─── Stats générales ───
+  insights.general.nPatients = Object.keys(byPatient).length;
+  insights.general.nMutuelles = Object.keys(byMut).length;
+  insights.general.panierMoyen = recap.nActes > 0 ? recap.totalFact / recap.nActes : 0;
+  insights.general.impayesTotal = insights.topImpayes.reduce((s, r) => s + r.montant, 0);
+
+  return insights;
+}
+
+function renderInsights() {
+  if (!STATE.results) return;
+  const I = computeInsights(STATE.results);
+  const R = STATE.results.recap;
+
+  const hs = I.healthScore;
+  const hsColor = hs >= 80 ? 'var(--emerald)' : hs >= 60 ? 'var(--amber)' : 'var(--rose)';
+  const hsLabel = hs >= 80 ? 'Excellent' : hs >= 60 ? 'Correct' : hs >= 40 ? 'Fragile' : 'Critique';
+
+  let html = '';
+
+  // ─── HEALTH SCORE ───
+  html += `<div class="insight-section">
+    <div style="background:linear-gradient(135deg,${hsColor}22,transparent);border:1px solid ${hsColor}44;border-radius:var(--radius-lg);padding:20px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <div style="text-align:center">
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Santé du Recouvrement</div>
+        <div style="font-size:56px;font-weight:800;color:${hsColor};line-height:1">${hs}<span style="font-size:24px;opacity:0.6">/100</span></div>
+        <div style="font-size:14px;color:${hsColor};font-weight:600;margin-top:4px">${hsLabel}</div>
+      </div>
+      <div style="flex:1;min-width:250px;font-size:12px;color:var(--text-dim);line-height:1.7">
+        <div>• Taux de recouvrement : <strong style="color:var(--text)">${pct(R.taux)}</strong></div>
+        <div>• Panier moyen : <strong style="color:var(--text)">${fmt(I.general.panierMoyen)}</strong></div>
+        <div>• Montant en impayé : <strong style="color:var(--rose)">${fmt(I.general.impayesTotal)}</strong></div>
+        <div>• Patients à risque détectés : <strong style="color:${I.patientsRisque.length > 0 ? 'var(--amber)' : 'var(--emerald)'}">${I.patientsRisque.length}</strong></div>
+      </div>
+    </div>
+  </div>`;
+
+  // ─── PATIENTS À RISQUE ───
+  if (I.patientsRisque.length) {
+    html += `<div class="insight-section">
+      <div class="insight-section-title">🚨 Patients à risque (${I.patientsRisque.length})</div>
+      <div class="insight-card danger">
+        <div class="insight-subtitle">Patients avec impayés récurrents — à surveiller ou recouvrer</div>
+        <table class="mut-stat-table">
+          <thead><tr><th>Patient</th><th>Actes</th><th>Impayés</th><th class="num">Facturé</th><th class="num">Reçu</th><th class="num">Dû</th></tr></thead>
+          <tbody>`;
+    I.patientsRisque.forEach(p => {
+      const du = p.totalFact - p.totalRecu;
+      html += `<tr>
+        <td><strong>${p.patient}</strong></td>
+        <td>${p.actes.length}</td>
+        <td><span style="color:var(--rose);font-weight:600">${p.nImpaye}</span></td>
+        <td class="num">${fmt(p.totalFact)}</td>
+        <td class="num">${fmt(p.totalRecu)}</td>
+        <td class="num" style="color:var(--rose);font-weight:600">${fmt(du)}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+
+  // ─── STATS PAR MUTUELLE ───
+  if (I.mutStats.length) {
+    html += `<div class="insight-section">
+      <div class="insight-section-title">🏦 Performance par Organisme</div>
+      <div class="insight-card info">
+        <div class="insight-subtitle">Quelle mutuelle paie le mieux ? Qui sous-règle systématiquement ?</div>
+        <table class="mut-stat-table">
+          <thead><tr><th>Organisme</th><th>Actes</th><th class="num">Facturé</th><th class="num">Reçu</th><th>Taux</th><th>Réussite</th></tr></thead>
+          <tbody>`;
+    I.mutStats.forEach(m => {
+      const tauxCol = m.taux >= 85 ? 'var(--emerald)' : m.taux >= 60 ? 'var(--amber)' : 'var(--rose)';
+      const okCol = m.tauxOk >= 85 ? 'var(--emerald)' : m.tauxOk >= 60 ? 'var(--amber)' : 'var(--rose)';
+      html += `<tr>
+        <td><strong>${m.org}</strong></td>
+        <td>${m.nActes}</td>
+        <td class="num">${fmt(m.facture)}</td>
+        <td class="num">${fmt(m.recu)}</td>
+        <td><span class="progress-mini"><span class="progress-mini-fill" style="width:${Math.min(100,m.taux)}%;background:${tauxCol}"></span></span><span style="color:${tauxCol};font-weight:600">${m.taux.toFixed(0)}%</span></td>
+        <td><span style="color:${okCol};font-weight:600">${m.nOk}/${m.nActes}</span> <span style="color:var(--text-muted);font-size:10px">(${m.tauxOk.toFixed(0)}%)</span></td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+
+  // ─── TOP IMPAYÉS ───
+  if (I.topImpayes.length) {
+    html += `<div class="insight-section">
+      <div class="insight-section-title">💰 Top Impayés — Priorités de Relance</div>
+      <div class="insight-card warning">
+        <div class="insight-subtitle">Les plus gros montants non recouvrés — à traiter en priorité</div>
+        <table class="mut-stat-table">
+          <thead><tr><th>FSE</th><th>Patient</th><th>Organisme AMC</th><th class="num">Montant</th></tr></thead>
+          <tbody>`;
+    I.topImpayes.forEach(r => {
+      html += `<tr>
+        <td style="font-family:monospace;font-size:11px">${r.fse}</td>
+        <td><strong>${r.patient}</strong></td>
+        <td style="font-size:11px;color:var(--text-muted)">${r.orgAMC}</td>
+        <td class="num" style="color:var(--rose);font-weight:700">${fmt(r.montant)}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div></div>`;
+  }
+
+  // ─── COLLISIONS ───
+  if (I.collisions.length) {
+    html += `<div class="insight-section">
+      <div class="insight-section-title">⚠️ Collisions Potentielles</div>
+      <div class="insight-card danger">
+        <div class="insight-subtitle">FSE qui matchent entre fichiers mais avec des noms différents — vérifier manuellement</div>`;
+    I.collisions.forEach(r => {
+      html += `<div style="padding:10px;border-bottom:1px solid var(--border);font-size:12px">
+        <div><strong>FSE ${r.fse}</strong> — ${r.patient} — Confiance: <span style="color:var(--rose);font-weight:600">${r.confidence}%</span></div>`;
+      if (r.warnings && r.warnings.length) {
+        r.warnings.forEach(w => html += `<div style="font-size:11px;color:var(--text-dim);margin-top:3px">${w}</div>`);
+      }
+      html += `</div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // ─── OUTLIERS ───
+  if (I.outliers.length) {
+    html += `<div class="insight-section">
+      <div class="insight-section-title">📊 Montants Inhabituels</div>
+      <div class="insight-card info">
+        <div class="insight-subtitle">Actes aux montants anormalement élevés (vs médiane ${fmt(I.general.median)}) — vérifier la cotation</div>`;
+    I.outliers.forEach(r => {
+      html += `<div style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:12px;display:flex;justify-content:space-between;align-items:center">
+        <div><strong>${r.patient}</strong> <span style="color:var(--text-muted);font-size:11px">(FSE ${r.fse})</span></div>
+        <div style="font-weight:700;color:var(--sky)">${fmt(r.montant)}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // ─── RECOMMANDATIONS ───
+  const recos = [];
+  if (R.nImpaye > 5) recos.push({ icon:'📞', title:`Lancer ${R.nImpaye} relances`, desc:'Un stock d’impayés commence à s’accumuler. Prioriser les top impayés ci-dessus.' });
+  if (R.nEcart > 10) recos.push({ icon:'🔍', title:`Vérifier les écarts (${R.nEcart})`, desc:'Beaucoup d’écarts de montants — probablement des refus partiels de mutuelles ou erreurs de cotation.' });
+  if (R.nVerif > 0) recos.push({ icon:'👀', title:`${R.nVerif} cas à vérifier manuellement`, desc:'Des rapprochements ont une confiance faible — ouvrir l’onglet À VÉRIFIER.' });
+  if (I.patientsRisque.length > 3) recos.push({ icon:'⚠️', title:'Plusieurs patients à risque', desc:'Envisager un système d’acompte ou de rappel pour les patients récidivistes.' });
+  const worstMut = I.mutStats.filter(m => m.nActes >= 3).sort((a, b) => a.taux - b.taux)[0];
+  if (worstMut && worstMut.taux < 70) recos.push({ icon:'🏦', title:`${worstMut.org} sous-performe`, desc:`Taux de recouvrement de ${worstMut.taux.toFixed(0)}% seulement sur ${worstMut.nActes} actes — contact à prendre.` });
+  if (recos.length === 0) recos.push({ icon:'✅', title:'Situation saine', desc:'Aucune action prioritaire détectée ce mois-ci. Continue comme ça !' });
+
+  html += `<div class="insight-section">
+    <div class="insight-section-title">💡 Actions Recommandées</div>
+    <div class="insight-grid">`;
+  recos.forEach(r => {
+    html += `<div class="insight-card success">
+      <div class="insight-title"><span style="font-size:16px">${r.icon}</span> ${r.title}</div>
+      <div style="font-size:12px;color:var(--text-dim);line-height:1.5">${r.desc}</div>
+    </div>`;
+  });
+  html += `</div></div>`;
+
+  $('insights-content').innerHTML = html;
+  $('insights-modal').style.display = 'block';
+}
+
+/* ─── IA ANTHROPIC INTEGRATION (clé stockée en localStorage uniquement) ─── */
+const AI_KEY_STORAGE = 'pec_anthropic_key_v1';
+const AI_MODEL = 'claude-haiku-4-5'; // économique pour la vérification
+const AI_API_URL = 'https://api.anthropic.com/v1/messages';
+
+function getApiKey() {
+  return localStorage.getItem(AI_KEY_STORAGE) || '';
+}
+
+function setApiKey(k) {
+  if (k) localStorage.setItem(AI_KEY_STORAGE, k);
+  else localStorage.removeItem(AI_KEY_STORAGE);
+}
+
+function openApiKeyModal() {
+  const current = getApiKey();
+  $('apikey-input').value = current;
+  const status = $('apikey-status');
+  if (current) status.innerHTML = `<span style="color:var(--emerald)">✅ Clé enregistrée (${current.slice(0,15)}...${current.slice(-4)})</span>`;
+  else status.innerHTML = `<span style="color:var(--text-muted)">Aucune clé enregistrée</span>`;
+  $('apikey-modal').style.display = 'block';
+  $('apikey-input').focus();
+}
+
+function closeApiKeyModal() {
+  $('apikey-modal').style.display = 'none';
+}
+
+function saveApiKey() {
+  const k = $('apikey-input').value.trim();
+  if (k && !k.startsWith('sk-ant-')) {
+    $('apikey-status').innerHTML = `<span style="color:var(--rose)">⚠️ La clé doit commencer par sk-ant-</span>`;
+    return;
+  }
+  setApiKey(k);
+  $('apikey-status').innerHTML = `<span style="color:var(--emerald)">✅ Clé enregistrée dans ce navigateur</span>`;
+  setTimeout(closeApiKeyModal, 800);
+}
+
+function clearApiKey() {
+  if (!confirm('Supprimer la clé API de ce navigateur ?')) return;
+  setApiKey('');
+  $('apikey-input').value = '';
+  $('apikey-status').innerHTML = `<span style="color:var(--text-muted)">Clé supprimée</span>`;
+}
+
+// Prépare le contexte pour Claude
+function buildAIPrompt(cas) {
+  const lines = [];
+  cas.forEach((c, i) => {
+    const r = c.row;
+    lines.push(`CAS ${i+1} — FSE ${r.fse}`);
+    lines.push(`  Patient en recettes : "${r.patient}"`);
+    lines.push(`  Date acte : ${r.date || 'N/A'} | Facturé : ${r.montant}€ | Attendu AMC : ${r.attenduAMC}€`);
+    if (c.candidates && c.candidates.length) {
+      lines.push(`  CANDIDATS (paiements potentiellement reliés, non encore associés) :`);
+      c.candidates.forEach((cand, j) => {
+        lines.push(`    ${String.fromCharCode(65+j)}. Source: ${cand.source} | FSE: ${cand.fse} | Patient: "${cand.patient}" | Montant: ${cand.montant}€${cand.date ? ' | Date: '+cand.date : ''}`);
+      });
+    }
+    if (c.matched) {
+      lines.push(`  DÉJÀ MATCHÉ : Patient cible "${c.matched.patient}" — ${c.matched.montant}€ (${c.matched.source})`);
+    }
+    if (c.warnings && c.warnings.length) {
+      lines.push(`  Warnings actuels : ${c.warnings.join(' ; ')}`);
+    }
+    lines.push('');
+  });
+
+  return `Tu es un expert en recouvrement médical (cabinet dentaire en France).
+J'analyse des rapprochements entre un livre de recettes et des relevements de paiements (Sécu + Mutuelles).
+
+Voici des CAS DOUTEUX où mon algorithme hésite. Pour chacun, dis-moi si le rapprochement proposé (ou les candidats) est :
+- VALIDE : c'est bien le bon paiement (même patient, même acte)
+- INVALIDE : ce n'est PAS le bon paiement (collision de N° FSE, hom*onyme, paiement d'un autre acte)
+- DOUTEUX : impossible de trancher sans plus d'info
+
+Répondez UNIQUEMENT en JSON strict (pas de markdown, pas de texte autour) :
+{
+  "cases": [
+    { "id": 1, "verdict": "VALIDE|INVALIDE|DOUTEUX", "chosen": "A|B|C|null", "reason": "explication courte en français (max 2 phrases)" }
+  ]
+}
+
+CAS À ANALYSER :
+
+${lines.join('\n')}`;
+}
+
+async function callClaude(prompt) {
+  const key = getApiKey();
+  if (!key) throw new Error('Aucune clé API enregistrée');
+
+  const resp = await fetch(AI_API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: AI_MODEL,
+      max_tokens: 2000,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+
+  if (!resp.ok) {
+    const err = await resp.text();
+    throw new Error(`API ${resp.status}: ${err.slice(0, 200)}`);
+  }
+
+  const data = await resp.json();
+  const text = data.content?.[0]?.text || '';
+  return { text, usage: data.usage };
+}
+
+function parseAIResponse(text) {
+  // Nettoie les eventuels backticks markdown
+  const cleaned = text.replace(/^```json\s*/i, '').replace(/```$/, '').trim();
+  try {
+    return JSON.parse(cleaned);
+  } catch (e) {
+    // Tente d'extraire le premier objet JSON
+    const match = cleaned.match(/\{[\s\S]*\}/);
+    if (match) return JSON.parse(match[0]);
+    throw new Error('Réponse IA non parsable: ' + text.slice(0, 200));
+  }
+}
+
+// Construit la liste des cas à vérifier
+function buildSuspectCases() {
+  if (!STATE.results) return [];
+  const items = STATE.results.items;
+  const cas = [];
+
+  // 1. Items "À VÉRIFIER" (confidence < 70 ou warnings)
+  items.filter(r => r.statut === 'À VÉRIFIER' || (r.confidence && r.confidence < 70)).forEach(r => {
+    cas.push({
+      row: r,
+      candidates: [],
+      matched: r.totalRecu > 0 ? {
+        patient: r.secuDetail?.patient || r.mutDetail?.lines?.[0]?.patient || 'inconnu',
+        montant: r.totalRecu,
+        source: r.matchType
+      } : null,
+      warnings: r.warnings || []
+    });
+  });
+
+  // 2. Impayés où il existe un paiement orphelin avec un nom proche
+  const orphelins = STATE.results.items.filter(r => r.statut === 'ORPHELIN');
+
+  items.filter(r => r.statut === 'IMPAYÉ' && r.patientNorm).slice(0, 10).forEach(r => {
+    const candidates = [];
+    orphelins.forEach(o => {
+      if (!o.patientNorm) return;
+      const s = nameScore(r.patientNorm, o.patientNorm);
+      if (s >= 70) {
+        const src = o.matchType === 'orphelin-secu' ? 'Sécu' : (o.mutSources || 'Mutuelle');
+        candidates.push({ source: src, fse: o.fse, patient: o.patient, montant: o.totalRecu, score: s });
+      }
+    });
+    if (candidates.length) {
+      candidates.sort((a,b) => b.score - a.score);
+      cas.push({ row: r, candidates: candidates.slice(0, 4), matched: null, warnings: ['Impayé avec candidats potentiels'] });
+    }
+  });
+
+  return cas.slice(0, 20); // Limite à 20 cas pour maîtriser le coût
+}
+
+async function runAIVerification() {
+  if (!STATE.results) {
+    showAlert('Lance d’abord un rapprochement');
+    return;
+  }
+  const key = getApiKey();
+  if (!key) {
+    openApiKeyModal();
+    return;
+  }
+
+  $('ai-modal').style.display = 'block';
+  const content = $('ai-content');
+
+  const cas = buildSuspectCases();
+  if (cas.length === 0) {
+    content.innerHTML = `<div class="ai-card success" style="border-left:3px solid var(--emerald)">
+      <div style="font-size:14px;font-weight:600">✅ Aucun cas douteux détecté</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:6px">Tous les rapprochements ont une confiance élevée. Pas besoin de vérification IA.</div>
+    </div>`;
+    return;
+  }
+
+  content.innerHTML = `<div class="ai-card" style="text-align:center;padding:24px">
+    <div class="ai-loader"></div>
+    <span style="font-size:13px">Claude analyse ${cas.length} cas douteux…</span>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:8px">~5–10 secondes</div>
+  </div>`;
+
+  try {
+    const prompt = buildAIPrompt(cas);
+    const t0 = Date.now();
+    const { text, usage } = await callClaude(prompt);
+    const dt = ((Date.now() - t0) / 1000).toFixed(1);
+
+    const parsed = parseAIResponse(text);
+    const verdicts = parsed.cases || [];
+
+    let html = '';
+    cas.forEach((c, i) => {
+      const v = verdicts.find(x => x.id === i + 1) || {};
+      const r = c.row;
+      const verdictCls = v.verdict === 'VALIDE' ? 'ai-verdict-ok' : v.verdict === 'INVALIDE' ? 'ai-verdict-ko' : 'ai-verdict-doubt';
+      const verdictIcon = v.verdict === 'VALIDE' ? '✅' : v.verdict === 'INVALIDE' ? '❌' : '❓';
+
+      html += `<div class="ai-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="font-size:13px;font-weight:600">${r.patient} <span style="color:var(--text-muted);font-size:11px;font-weight:400">FSE ${r.fse} — ${fmt(r.montant)}</span></div>
+          <span class="ai-verdict ${verdictCls}">${verdictIcon} ${v.verdict || '?'}</span>
+        </div>`;
+
+      if (c.matched) {
+        html += `<div style="font-size:11px;color:var(--text-dim)">Match actuel : ${c.matched.patient} — ${fmt(c.matched.montant)} (${c.matched.source})</div>`;
+      }
+      if (c.candidates && c.candidates.length) {
+        html += `<div style="font-size:11px;color:var(--text-muted);margin-top:6px">Candidats : ${c.candidates.map((cd,j) => `<strong>${String.fromCharCode(65+j)}</strong>=${cd.patient} (${fmt(cd.montant)})`).join(' │ ')}</div>`;
+        if (v.chosen && v.chosen !== 'null') {
+          html += `<div style="font-size:12px;color:var(--sky);margin-top:6px;font-weight:600">→ IA recommande : option ${v.chosen}</div>`;
+        }
+      }
+      html += `<div class="ai-reasoning">💭 ${v.reason || 'Pas de justification fournie'}</div>`;
+      html += `</div>`;
+    });
+
+    // Stats coût approximatif
+    const inT = usage?.input_tokens || 0;
+    const outT = usage?.output_tokens || 0;
+    // Haiku 4.5 : ~$1/M in, ~$5/M out (approx)
+    const cost = (inT * 1 + outT * 5) / 1_000_000;
+    html += `<div class="ai-cost">⏱️ ${dt}s │ ${inT} tokens entrée + ${outT} tokens sortie │ 💰 ~$${cost.toFixed(4)} (${(cost*0.92).toFixed(4)}€)</div>`;
+
+    content.innerHTML = html;
+  } catch (err) {
+    content.innerHTML = `<div class="ai-card" style="border-left:3px solid var(--rose)">
+      <div style="font-size:14px;font-weight:600;color:var(--rose)">❌ Erreur</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:8px;font-family:monospace;background:var(--bg-surface);padding:10px;border-radius:6px;white-space:pre-wrap">${err.message}</div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:10px">Vérifie ta clé API et ton solde sur <a href="https://console.anthropic.com" target="_blank" style="color:var(--sky)">console.anthropic.com</a></div>
+    </div>`;
+  }
+}
+
+/* ─── ALERTS ─── */
+function showAlert(msg) {
+  $('alert-msg').innerHTML = msg;
+  $('alert').classList.add('visible');
+}
+function hideAlert() { $('alert').classList.remove('visible'); }
+
+/* ─── EXPORT CSV ─── */
+function exportCSV() {
+  if (!STATE.results) return;
+  const BOM = '\uFEFF';
+  const sep = ';';
+  let csv = BOM;
+  csv += ['FSE','Patient','Date','Facturé','Attendu AMO','Attendu AMC','Reçu AMO','Reçu AMC','Total Reçu','Écart','Statut','Source Mutuelle','CMU','Match'].join(sep) + '\n';
+  STATE.results.items.forEach(r => {
+    csv += [
+      r.fse, `"${r.patient}"`, r.date ? new Date(r.date).toLocaleDateString('fr-FR') : '',
+      r.montant, r.attenduAMO, r.attenduAMC,
+      r.recuAMO, r.recuAMC, r.totalRecu, r.ecart,
+      r.statut, r.mutSources, r.isCMU ? 'Oui' : 'Non', r.matchType
+    ].join(sep) + '\n';
+  });
+  download(csv, `pec-rapprochement-${new Date().toISOString().slice(0,10)}.csv`, 'text/csv;charset=utf-8');
+}
+
+/* ─── EXPORT AUDIT ─── */
+function exportAudit() {
+  if (!STATE.results) return;
+  const r = STATE.results.recap;
+  let txt = `RAPPORT DE RAPPROCHEMENT — PEC ANTILLES PRO v2\n`;
+  txt += `${'═'.repeat(55)}\n`;
+  txt += `Date du rapport : ${new Date().toLocaleString('fr-FR')}\n\n`;
+
+  txt += `SYNTHÈSE GLOBALE\n${'─'.repeat(40)}\n`;
+  txt += `Total facturé :       ${fmt(r.totalFact)}\n`;
+  txt += `Reçu AMO (Sécu) :     ${fmt(r.totalAMO)}\n`;
+  txt += `Reçu AMC (Mutuelles): ${fmt(r.totalAMC)}\n`;
+  txt += `Total encaissé :      ${fmt(r.totalRecu)}\n`;
+  txt += `Reste à percevoir :   ${fmt(r.reste)}\n`;
+  txt += `Taux recouvrement :   ${pct(r.taux)}\n\n`;
+
+  txt += `VENTILATION\n${'─'.repeat(40)}\n`;
+  txt += `✅ OK :        ${r.nOK}\n`;
+  txt += `⚠️ Écarts :    ${r.nEcart}\n`;
+  txt += `❌ Impayés :   ${r.nImpaye}\n`;
+  txt += `🔍 Orphelins : ${r.nOrphelin}\n`;
+  txt += `Total :         ${r.total}\n\n`;
+
+  txt += `FICHIERS CHARGÉS\n${'─'.repeat(40)}\n`;
+  if (STATE.files.recettes) txt += `Recettes : ${STATE.files.recettes.name}\n`;
+  if (STATE.files.secu) txt += `Sécu :     ${STATE.files.secu.name}\n`;
+  STATE.files.mutuelles.forEach((f,i) => { if(f) txt += `Mutuelle ${i+1}: ${f.name}\n`; });
+  txt += '\n';
+
+  // List impayés
+  const impayes = STATE.results.items.filter(r => r.statut === 'IMPAYÉ');
+  if (impayes.length) {
+    txt += `DÉTAIL IMPAYÉS (${impayes.length})\n${'─'.repeat(40)}\n`;
+    impayes.forEach(r => {
+      txt += `  FSE ${r.fse} — ${r.patient} — ${fmt(r.montant)}\n`;
+    });
+    txt += '\n';
+  }
+
+  // List écarts
+  const ecarts = STATE.results.items.filter(r => r.statut === 'ÉCART');
+  if (ecarts.length) {
+    txt += `DÉTAIL ÉCARTS (${ecarts.length})\n${'─'.repeat(40)}\n`;
+    ecarts.forEach(r => {
+      txt += `  FSE ${r.fse} — ${r.patient} — Facturé: ${fmt(r.montant)} — Reçu: ${fmt(r.totalRecu)} — Écart: ${fmt(r.ecart)}\n`;
+    });
+  }
+
+  download(txt, `pec-audit-${new Date().toISOString().slice(0,10)}.txt`, 'text/plain;charset=utf-8');
+}
+
+function download(content, filename, mime) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([content], { type: mime }));
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ─── MUTUELLE SLOTS ─── */
+function renderMutSlots() {
+  $('mut-grid').innerHTML = MUT_SLOTS.map((s, i) => {
+    const loaded = STATE.files.mutuelles[i];
+    return `<div class="mut-slot ${loaded ? 'loaded' : ''}" id="mut-${i}">
+      <input type="file" accept=".xlsx,.xls" data-idx="${i}">
+      <button class="remove-btn" data-idx="${i}">✕</button>
+      <div class="mut-slot-icon">${s.icon}</div>
+      <div class="mut-slot-text">${s.label}</div>
+      ${loaded ? `<div class="mut-slot-name">${loaded.name}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  // Event listeners
+  $('mut-grid').querySelectorAll('input[type=file]').forEach(inp => {
+    inp.onchange = async (e) => {
+      const idx = +inp.dataset.idx;
+      const file = e.target.files[0];
+      if (!file || !file.name.match(/\.xlsx?$/i)) return showAlert('<strong>Erreur</strong> — Fichier Excel (.xlsx) requis');
+      try {
+        STATE.files.mutuelles[idx] = file;
+        STATE.raw.mutuelles[idx] = await readXlsx(file);
+        hideAlert();
+        renderMutSlots();
+        checkReady();
+      } catch(err) { showAlert('<strong>Erreur</strong> — ' + err.message); }
+    };
+  });
+
+  $('mut-grid').querySelectorAll('.remove-btn').forEach(btn => {
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      const idx = +btn.dataset.idx;
+      STATE.files.mutuelles[idx] = null;
+      STATE.raw.mutuelles[idx] = null;
+      renderMutSlots();
+      checkReady();
+    };
+  });
+
+  const count = STATE.files.mutuelles.filter(Boolean).length;
+  $('mut-count').textContent = `(${count} chargée${count > 1 ? 's' : ''})`;
+}
+
+/* ─── READY CHECK ─── */
+function checkReady() {
+  const ready = STATE.files.recettes && STATE.files.secu;
+  $('btn-analyse').disabled = !ready;
+}
+
+/* ─── MAIN ANALYSIS ─── */
+async function runAnalysis() {
+  hideAlert();
+  $('loading').classList.add('visible');
+  $('results').classList.remove('visible');
+  $('loading-text').textContent = 'Analyse en cours…';
+
+  try {
+    $('loading-sub').textContent = 'Lecture du livre de recettes…';
+    const recettes = parseRecettes(STATE.raw.recettes);
+    if (!recettes.length) throw new Error('Aucune recette trouvée dans le fichier');
+
+    $('loading-sub').textContent = 'Lecture du relevé sécu…';
+    const secuRows = parseSecu(STATE.raw.secu);
+
+    $('loading-sub').textContent = 'Lecture des mutuelles…';
+    let mutRows = [];
+    STATE.raw.mutuelles.forEach((data, i) => {
+      if (data && data.length) {
+        const fname = STATE.files.mutuelles[i]?.name || '';
+        mutRows = mutRows.concat(parseMutuelle(data, fname));
+      }
+    });
+
+    $('loading-sub').textContent = 'Rapprochement…';
+    await new Promise(r => setTimeout(r, 200)); // let UI breathe
+
+    STATE.results = rapprochement(recettes, secuRows, mutRows);
+
+    renderKPIs(STATE.results.recap);
+    renderStatusBar(STATE.results.recap);
+    renderTable();
+
+    $('results').classList.add('visible');
+  } catch(err) {
+    showAlert(`<strong>Erreur d'analyse</strong> — ${err.message}`);
+  } finally {
+    $('loading').classList.remove('visible');
+  }
+}
+
+/* ─── INIT ─── */
+function init() {
+  renderMutSlots();
+
+  // Required file handlers
+  ['recettes', 'secu'].forEach(type => {
+    const input = $('file-' + type);
+    const card = $('drop-' + type);
+
+    input.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file || !file.name.match(/\.xlsx?$/i)) return showAlert('<strong>Erreur</strong> — Fichier Excel (.xlsx) requis');
+      try {
+        STATE.files[type] = file;
+        STATE.raw[type] = await readXlsx(file);
+        card.classList.add('loaded');
+        $('info-' + type).textContent = `✓ ${file.name} — ${STATE.raw[type].length} lignes`;
+        hideAlert();
+        checkReady();
+        $('btn-reset').style.display = 'inline-flex';
+      } catch(err) { showAlert('<strong>Erreur</strong> — ' + err.message); }
+    };
+
+    // Drag & drop
+    card.ondragover = e => { e.preventDefault(); card.style.borderColor = 'var(--emerald)'; };
+    card.ondragleave = () => { card.style.borderColor = ''; };
+    card.ondrop = e => { e.preventDefault(); card.style.borderColor = ''; input.files = e.dataTransfer.files; input.dispatchEvent(new Event('change')); };
+  });
+
+  // Buttons
+  $('btn-analyse').onclick = runAnalysis;
+  $('btn-reset').onclick = () => {
+    STATE.files = { recettes:null, secu:null, mutuelles:[] };
+    STATE.raw = { recettes:[], secu:[], mutuelles:[] };
+    STATE.results = null;
+    STATE.filter = 'ALL';
+    STATE.search = '';
+    STATE.sort = { col:null, asc:true };
+    ['recettes','secu'].forEach(t => {
+      $('file-'+t).value = '';
+      $('drop-'+t).classList.remove('loaded');
+      $('info-'+t).textContent = '';
+    });
+    renderMutSlots();
+    $('results').classList.remove('visible');
+    $('btn-reset').style.display = 'none';
+    hideAlert();
+    checkReady();
+  };
+
+  $('btn-csv').onclick = exportCSV;
+  $('btn-audit').onclick = exportAudit;
+  $('btn-insights').onclick = renderInsights;
+  $('insights-close').onclick = () => $('insights-modal').style.display = 'none';
+  $('insights-modal').onclick = e => { if (e.target.id === 'insights-modal') $('insights-modal').style.display = 'none'; };
+  $('btn-ai-verify').onclick = runAIVerification;
+  $('btn-ai-key').onclick = openApiKeyModal;
+  $('apikey-close').onclick = closeApiKeyModal;
+  $('apikey-cancel').onclick = closeApiKeyModal;
+  $('apikey-save').onclick = saveApiKey;
+  $('apikey-clear').onclick = clearApiKey;
+  $('apikey-modal').onclick = e => { if (e.target.id === 'apikey-modal') closeApiKeyModal(); };
+  $('ai-close').onclick = () => $('ai-modal').style.display = 'none';
+  $('ai-modal').onclick = e => { if (e.target.id === 'ai-modal') $('ai-modal').style.display = 'none'; };
+
+  // Search
+  $('search').oninput = (e) => {
+    STATE.search = e.target.value;
+    renderTable();
+  };
+
+  // Detail panel close
+  $('detail-close').onclick = () => $('detail-panel').classList.remove('open');
+  document.onkeydown = e => { if (e.key === 'Escape') $('detail-panel').classList.remove('open'); };
+
+  checkReady();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+<!-- INSIGHTS MODAL -->
+<div id="insights-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;backdrop-filter:blur(4px);padding:40px 20px;overflow-y:auto">
+  <div style="max-width:1100px;margin:0 auto;background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;position:relative">
+    <button id="insights-close" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:6px;background:var(--bg-surface);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:16px">✕</button>
+    <h2 style="font-size:20px;margin-bottom:8px;background:linear-gradient(135deg,var(--emerald),var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent">📊 Insights &amp; Patterns</h2>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px">Analyse automatique des tendances, anomalies et risques détectés</p>
+    <div id="insights-content"></div>
+  </div>
+</div>
+
+<style>
+.insight-card { background:var(--bg-glass); border:1px solid var(--border); border-radius:var(--radius); padding:14px; margin-bottom:12px; }
+.insight-card.danger { border-left:3px solid var(--rose); }
+.insight-card.warning { border-left:3px solid var(--amber); }
+.insight-card.success { border-left:3px solid var(--emerald); }
+.insight-card.info { border-left:3px solid var(--sky); }
+.insight-title { font-size:13px; font-weight:600; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+.insight-subtitle { font-size:11px; color:var(--text-muted); margin-bottom:10px; }
+.insight-section { margin-bottom:28px; }
+.insight-section-title { font-size:12px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+.insight-section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+.insight-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:12px; }
+.mut-stat-table { width:100%; font-size:12px; border-collapse:collapse; }
+.mut-stat-table th { text-align:left; padding:8px; border-bottom:1px solid var(--border); color:var(--text-muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; }
+.mut-stat-table td { padding:8px; border-bottom:1px solid var(--border); }
+.mut-stat-table td.num { text-align:right; font-variant-numeric:tabular-nums; }
+.progress-mini { display:inline-block; width:60px; height:6px; background:var(--bg-surface); border-radius:3px; overflow:hidden; vertical-align:middle; margin-right:6px; }
+.progress-mini-fill { height:100%; }
+</style>
+
+<!-- API KEY MODAL -->
+<div id="apikey-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:400;backdrop-filter:blur(4px);padding:60px 20px;overflow-y:auto">
+  <div style="max-width:520px;margin:0 auto;background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;position:relative">
+    <button id="apikey-close" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:6px;background:var(--bg-surface);border:1px solid var(--border);color:var(--text);cursor:pointer">✕</button>
+    <h2 style="font-size:18px;margin-bottom:8px">🔑 Clé API Anthropic</h2>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.5">
+      Ta clé est stockée <strong>uniquement dans ton navigateur</strong> (localStorage). Elle n'est jamais envoyée ailleurs que vers l'API Anthropic. Créer une clé : <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:var(--sky)">console.anthropic.com</a>
+    </p>
+    <input type="password" id="apikey-input" placeholder="sk-ant-api03-..." style="width:100%;padding:10px 12px;background:var(--bg-surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:monospace;font-size:12px;margin-bottom:12px">
+    <div id="apikey-status" style="font-size:11px;color:var(--text-muted);margin-bottom:14px;min-height:14px"></div>
+    <div style="display:flex;gap:8px;justify-content:space-between;align-items:center">
+      <button id="apikey-clear" class="btn btn-ghost" style="font-size:11px">🗑️ Supprimer la clé</button>
+      <div style="display:flex;gap:8px">
+        <button id="apikey-cancel" class="btn btn-ghost">Annuler</button>
+        <button id="apikey-save" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI VERIFY MODAL -->
+<div id="ai-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;backdrop-filter:blur(4px);padding:40px 20px;overflow-y:auto">
+  <div style="max-width:1000px;margin:0 auto;background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;position:relative">
+    <button id="ai-close" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:6px;background:var(--bg-surface);border:1px solid var(--border);color:var(--text);cursor:pointer">✕</button>
+    <h2 style="font-size:20px;margin-bottom:8px;background:linear-gradient(135deg,#A855F7,var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent">🤖 Analyse IA des cas douteux</h2>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px">Claude analyse les rapprochements à faible confiance et donne son verdict</p>
+    <div id="ai-content"></div>
+  </div>
+</div>
+
+<style>
+.ai-card { background:var(--bg-glass); border:1px solid var(--border); border-radius:var(--radius); padding:14px; margin-bottom:12px; }
+.ai-verdict { padding:8px 12px; border-radius:6px; font-size:12px; font-weight:600; display:inline-block; margin-bottom:8px; }
+.ai-verdict-ok { background:rgba(16,185,129,0.15); color:var(--emerald); }
+.ai-verdict-ko { background:rgba(244,63,94,0.15); color:var(--rose); }
+.ai-verdict-doubt { background:rgba(245,158,11,0.15); color:var(--amber); }
+.ai-reasoning { font-size:12px; color:var(--text-dim); line-height:1.6; margin-top:8px; }
+.ai-loader { display:inline-block; width:14px; height:14px; border:2px solid var(--border); border-top-color:var(--sky); border-radius:50%; animation:spin 0.8s linear infinite; vertical-align:middle; margin-right:8px; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.ai-cost { font-size:11px; color:var(--text-muted); margin-top:12px; padding-top:12px; border-top:1px solid var(--border); }
+</style>
+
+
+
+</body></html>
